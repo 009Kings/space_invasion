@@ -22,10 +22,12 @@ let WEAPONS = [
 // Assets
 var boom;
 var cursors;
+var largebooms;
 var launch;
 var music;
 var nukeboom;
 var pewpew;
+var smallbooms;
 
 
 // Game Objects

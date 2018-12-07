@@ -1,5 +1,5 @@
+
 function spawnEnemies () {
-    console.log("spawning enemy");
     var enemy = enemies.getFirstExists(false);
     enemy.reset(GAME_WIDTH - 10, game.rnd.integerInRange(10, GAME_HEIGHT - 10));
     enemy.body.velocity.x = game.rnd.integerInRange(-350, -50);
@@ -11,9 +11,9 @@ function spawnEnemies () {
 function damageEnemy (weapon, enemy) {
     //sound and visual effect
     if (WEAPONS[currentWeapon].name === "laser") {
-        boom.play();
+        explode("small", enemy);
     } else if (WEAPONS[currentWeapon].name === "missile") {
-        nukeboom.play();
+        explode("large", enemy);
     }
 
     //Logic
@@ -34,8 +34,23 @@ function damagePlayer (p, enemy) {
     enemy.kill();
     player.life -= 25;
     if (player.life <= 0) {
+        explode("large", enemy)
         player.kill();
     } else if (player.life < 40) {
         player.tint = "0xff0000";
+    }
+}
+
+function explode(size, focusPoint) {
+    if (size === "large") {
+        var explosion = largebooms.getFirstExists(false);
+        explosion.reset(focusPoint.body.x, focusPoint.body.y - 40);
+        explosion.play("largeboom", 30, false, true);
+        nukeboom.play();
+    } else if (size === "small") {
+        var explosion = smallbooms.getFirstExists(false);
+        explosion.reset(focusPoint.body.x, focusPoint.body.y);
+        explosion.play("smallboom", 30, false, true);
+        boom.play();
     }
 }

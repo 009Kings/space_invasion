@@ -30,6 +30,8 @@ function preload() {
     game.load.audio("nukeboom", "../assets/audio/ExplosionNuke.mp3");
 
     // Load some animations
+    game.load.spritesheet("smallboom", "../assets/img/explosion.png", 64,  64);
+    game.load.spritesheet("largeboom", "../assets/img/explode.png", 128, 128);
 }   
 
 // Set the initial game state (collisions are set up here, or initial spot)
@@ -64,6 +66,18 @@ function create() {
     lasers = addGroup(lasers, 20, "laser");
     missiles = addGroup(missiles, 10, "missile");
     enemies = addGroup(enemies, 10, "enemy");
+    largebooms = addGroup(largebooms, 10, "largeboom");
+    smallbooms = addGroup(smallbooms, 20, "smallboom");
+
+    // Add animations to explosions
+    largebooms.forEach(function(l){
+        l.animations.add("largeboom");
+    })
+    smallbooms.forEach(function(s){
+        s.animations.add("smallboom");
+    })
+
+    // Give each enemy health
     enemies.forEach(function(e){
         e.life = ENEMY_LIFE;
     })
