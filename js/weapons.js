@@ -1,6 +1,6 @@
 function fireWeapon() {
     // Check if the timer is valid. If so, we canot fire
-    if(game.time.now < weaponTimer) {
+    if(game.time.now < weaponTimer || player.life <= 0) {
         return;
     } 
 
@@ -29,7 +29,5 @@ function switchWeapon() {
     if (currentWeapon>=WEAPONS.length){
         currentWeapon=0;
     }
-    
-    console.log("switch weapon");
     switchWeaponTimer = game.time.now + 1000;
 }

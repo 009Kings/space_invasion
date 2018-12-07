@@ -45,9 +45,11 @@ function create() {
 
     // Music and sound
     // game.add.audio("music");
+    boom = game.add.audio("boom", 0.5);
     pewpew = game.add.audio("pewpew", 0.1);
     launch = game.add.audio("launch", 1);
-    music = new Phaser.Sound(game, "music", .5, true);
+    music = new Phaser.Sound(game, "music", 0.5, true);
+    nukeboom = game.add.audio("nukeboom", 0.5)
     setTimeout(function() { music.play(); }, 1000);
 
     // Stop when button isn't down
@@ -96,4 +98,9 @@ function update() {
         // Switch Weapons
         switchWeapon();
     }
+
+    // Collisions we want to listen for
+    game.physics.arcade.overlap(player, enemies, damagePlayer); // vs collide which is more hitting sth and bounching off
+    game.physics.arcade.overlap(lasers, enemies, damageEnemy);
+    game.physics.arcade.overlap(missiles, enemies, damageEnemy);
 }

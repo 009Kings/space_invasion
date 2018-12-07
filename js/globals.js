@@ -12,17 +12,19 @@ let PLAYER_START = {
 }
 
 let WEAPONS = [
-    {name: "laser", velocity: 450, timer: 200, offsetX: 10, offsetY: 0, damage: 25},
-    {name: "missile", velocity: 275, timer: 600, offsetX: 10, offsetY: 45, damage: 100}
+    {name: "laser", velocity: 500, timer: 150, offsetX: 10, offsetY: 0, damage: 25},
+    {name: "missile", velocity: 275, timer: 800, offsetX: 10, offsetY: 45, damage: 100}
 ]
 
 
 // GLOBAL VARIABLES
 
 // Assets
+var boom;
 var cursors;
 var launch;
 var music;
+var nukeboom;
 var pewpew;
 
 
