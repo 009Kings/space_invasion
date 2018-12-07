@@ -23,7 +23,7 @@ function preload() {
     game.load.image("enemy", "../assets/img/enemy.png");
 
     // Load some sounds 
-    game.load.audio("music", "../assets/audio/Shadelike.mp3");
+    game.load.audio("music", ["../assets/audio/Shadelike.mp3", "../assets/audio/SpaceAwesome.ogg", "../assets/audio/SpaceAwesome.mp3"]);
     game.load.audio("pewpew", ["../assets/audio/laser.ogg", "../assets/audio/laser.mp3", ]);
     game.load.audio("launch", "../assets/audio/missile.mp3");
     game.load.audio("boom", ["../assets/audio/explosion.ogg", "../assets/audio/explosion.mp3"]);
@@ -46,7 +46,8 @@ function create() {
     // Music and sound
     // game.add.audio("music");
     pewpew = game.add.audio("pewpew", 0.1);
-    music = new Phaser.Sound(game, "music", 1, true);
+    launch = game.add.audio("launch", 1);
+    music = new Phaser.Sound(game, "music", .5, true);
     setTimeout(function() { music.play(); }, 1000);
 
     // Stop when button isn't down
@@ -57,11 +58,15 @@ function create() {
     player.score = 0;
     player.life = STARTING_LIFE;
 
+    // Create group object for game objects with multiple instances
+    lasers = addGroup(lasers, 20, "laser");
+    missiles = addGroup(missiles, 10, "missile");
+
     // Define User Inputs
     cursors = game.input.keyboard.createCursorKeys(); // Arrow keys!
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR, Phaser.Keyboard.ENTER]);
 }
-
+ 
 // is the game loop. It'll run on a clock cycle and watch for any changes
 function update() {
     // Handle cursor/movement keys
@@ -84,12 +89,4 @@ function update() {
         // Switch Weapons
         switchWeapon();
     }
-}
-
-function fireWeapon() {
-    console.log("fire");  
-}
-
-function switchWeapon() {
-    console.log("switch weapon");
 }
