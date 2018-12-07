@@ -1,18 +1,21 @@
 // Constants
+const DRAG = 900;
+const ENEMY_LIFE = 100;
 const GAME_WIDTH = 700
 const GAME_HEIGHT = 550;
 const STARTING_LIFE = 100;
+const PLAYER_SPEED = 300;
 
 let PLAYER_START = {
     x : 100,
     y : 200
 }
-const PLAYER_SPEED = 300;
-const DRAG = 900;
+
 let WEAPONS = [
-    {name: "laser", velocity: 450, timer: 200, offsetX: 0, offsetY: 20, damage: 25},
-    {name: "missile", velocity: 275, timer: 600, offsetX: 0, offsetY: 25, damage: 100}
+    {name: "laser", velocity: 450, timer: 200, offsetX: 10, offsetY: 0, damage: 25},
+    {name: "missile", velocity: 275, timer: 600, offsetX: 10, offsetY: 45, damage: 100}
 ]
+
 
 // GLOBAL VARIABLES
 
@@ -24,6 +27,7 @@ var pewpew;
 
 
 // Game Objects
+var enemies;
 var lasers;
 var missiles;
 var player;

@@ -61,10 +61,17 @@ function create() {
     // Create group object for game objects with multiple instances
     lasers = addGroup(lasers, 20, "laser");
     missiles = addGroup(missiles, 10, "missile");
+    enemies = addGroup(enemies, 10, "enemy");
+    enemies.forEach(function(e){
+        e.life = ENEMY_LIFE;
+    })
 
     // Define User Inputs
     cursors = game.input.keyboard.createCursorKeys(); // Arrow keys!
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR, Phaser.Keyboard.ENTER]);
+
+    // Phaser's version of setInterval
+    game.time.events.loop(Phaser.Timer.SECOND * 2, spawnEnemies);
 }
  
 // is the game loop. It'll run on a clock cycle and watch for any changes
