@@ -86,6 +86,9 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys(); // Arrow keys!
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR, Phaser.Keyboard.ENTER]);
 
+    // Create the scorecared
+    createText();
+
     // Phaser's version of setInterval
     game.time.events.loop(Phaser.Timer.SECOND * 2, spawnEnemies);
 }

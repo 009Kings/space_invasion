@@ -28,6 +28,8 @@ var music;
 var nukeboom;
 var pewpew;
 var smallbooms;
+var textHP;
+var textScore;
 
 
 // Game Objects

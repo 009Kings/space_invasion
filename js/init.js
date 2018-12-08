@@ -6,6 +6,11 @@ function addGroup (object, numToCreate, spriteName) {
     object.createMultiple(numToCreate, spriteName);
     object.setAll("outOfBoundsKill", true);
     object.setAll("checkWorldBounds", true);
-    
+
     return object;
+}
+
+function createText() {
+    textHP = game.add.text(GAME_WIDTH - 150, 5, `Life: ${player.life}`, {fill: "#fff"});
+    textScore = game.add.text(GAME_WIDTH - 150, 40, `Score: ${player.score}`, {fill: "#fff"});
 }

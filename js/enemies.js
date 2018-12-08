@@ -22,7 +22,9 @@ function damageEnemy (weapon, enemy) {
 
     if (enemy.life <= 0) {
         enemy.kill(); 
-        // TODO: Add score
+        
+        // Add score
+        addScore(50);
     }
     
 }
@@ -30,9 +32,12 @@ function damageEnemy (weapon, enemy) {
 function damagePlayer (p, enemy) {
     boom.play();
     
-    //Logic
+    //Logic: kill the enemy, take some damage, get a consolation prize and update your health
     enemy.kill();
     player.life -= 25;
+    addScore(10);
+    textHP.text = `Life: ${player.life}`;
+
     if (player.life <= 0) {
         explode("large", enemy)
         player.kill();
