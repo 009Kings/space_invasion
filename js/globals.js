@@ -3,6 +3,7 @@ const DRAG = 900;
 const ENEMY_LIFE = 100;
 const GAME_WIDTH = 700
 const GAME_HEIGHT = 550;
+const SCORE_SLOTS = 5;
 const STARTING_LIFE = 100;
 const PLAYER_SPEED = 300;
 
@@ -22,10 +23,13 @@ let WEAPONS = [
 // Assets
 var boom;
 var cursors;
+var isburning = false;
+var fire;
 var largebooms;
 var launch;
 var music;
 var nukeboom;
+var onFire;
 var pewpew;
 var smallbooms;
 var textHP;

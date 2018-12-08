@@ -37,11 +37,17 @@ function damagePlayer (p, enemy) {
     player.life -= 25;
     addScore(10);
     textHP.text = `Life: ${player.life}`;
+    explode("small", enemy);
 
     if (player.life <= 0) {
         explode("large", enemy)
         player.kill();
+        onFire.isFinished = true;
+        onFire.remove(onFire, true);
+        //Game over
+        gameOver();
     } else if (player.life < 40) {
+        burning(player);
         player.tint = "0xff0000";
     }
 }
@@ -58,4 +64,10 @@ function explode(size, focusPoint) {
         explosion.play("smallboom", 30, false, true);
         boom.play();
     }
+}
+
+function burning(focusPoint) {
+    fire = onFire.getFirstExists(false);
+    fire.reset(focusPoint.body.x, focusPoint.body.y - 40);
+    isburning = true;
 }

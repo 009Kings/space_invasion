@@ -7,7 +7,7 @@ var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.auto, "game", {
 
 // Does whatever you need done first
 function init () {
-    console.log("init");
+    displayHighScores();
 }
 
 // Loads whatever you need ie images, sprites
@@ -32,6 +32,7 @@ function preload() {
     // Load some animations
     game.load.spritesheet("smallboom", "../assets/img/explosion.png", 64,  64);
     game.load.spritesheet("largeboom", "../assets/img/explode.png", 128, 128);
+    game.load.spritesheet("onfire", "../assets/img/11_fire_spritesheet.png", 100, 100);
 }   
 
 // Set the initial game state (collisions are set up here, or initial spot)
@@ -65,9 +66,10 @@ function create() {
     // Create group object for game objects with multiple instances
     lasers = addGroup(lasers, 20, "laser");
     missiles = addGroup(missiles, 10, "missile");
-    enemies = addGroup(enemies, 10, "enemy");
+    enemies = addGroup(enemies, 40, "enemy");
     largebooms = addGroup(largebooms, 10, "largeboom");
     smallbooms = addGroup(smallbooms, 20, "smallboom");
+    onFire = addGroup(onFire, 40, "onfire");
 
     // Add animations to explosions
     largebooms.forEach(function(l){
@@ -75,6 +77,9 @@ function create() {
     })
     smallbooms.forEach(function(s){
         s.animations.add("smallboom");
+    })
+    onFire.forEach(function(f){
+        f.animations.add("onfire");
     })
 
     // Give each enemy health
@@ -120,4 +125,12 @@ function update() {
     game.physics.arcade.overlap(player, enemies, damagePlayer); // vs collide which is more hitting sth and bounching off
     game.physics.arcade.overlap(lasers, enemies, damageEnemy);
     game.physics.arcade.overlap(missiles, enemies, damageEnemy);
+
+    // On fire
+    if (isburning && fire) {
+        fire.play("onfire", 50, true, true);
+        // fire.reset(player.body.x, player.body.y - 40);
+        fire.body.x = player.body.x - 40;
+        fire.body.y = player.body.y -45;
+    }
 }
